@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+#define ll long long 
+using namespace std;
+int arr[10][10];
+
+int chessBlock(int r,int c,int n ){
+    int rowDir[]={+2,+1,-1,-2,-2,-1,+1,+2};
+    int colDir[]={+1,+2,+2,+1,-1,-2,-2,-1};
+
+    if(r<0||c<0||r>9||c>9)
+    return 0;
+    else if(n<=0)
+    return 0;
+    else if(n==1 && arr[r][c]!=1)
+    arr[r][c]+=1;
+    else
+    return chessBlock(r+2,c+1,n-1)+chessBlock(r+1,c+2,n-1)+chessBlock(r-1,c+2,n-1)+chessBlock(r-2,c+1,n-1)+chessBlock(r-2,c-1,n-1)+chessBlock(r-1,c-2,n-1)+chessBlock(r+1,c-2,n-1)+chessBlock(r+2,c-1,n-1);
+
+}
+
+int main()
+{
+    int sum=0;
+    int i,j,k;
+    cin>>i>>j>>k;
+    int move=chessBlock(i-1,j-1,k+1);
+     for(int i=0;i<10;i++) 
+        for(int j=0;j<10;j++)
+            sum+=arr[i][j];
+
+    cout<<sum<<endl;
+}
